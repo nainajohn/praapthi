@@ -1,0 +1,805 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Praapthi | Online Course Platform</title>
+
+  <link href="{% static 'cms/css/styles.css' %}" rel="stylesheet">
+  <link href="{% static 'cms/css/app.css' %}" rel="stylesheet">
+
+  <script type="text/javascript" src="{% static 'cms/bower_components/jquery/dist/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'cms/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>
+
+
+  
+</head>
+<body>
+
+<!--
+Navigation Bar
+-->  
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/cms"><img src="{% static 'lms/images/pr_banner.png' %}"></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+      </div><!-- /.col-md-4-->
+      <div class="col-md-4">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/cms/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Catalog</a></li>
+
+            <li role="presentation" class="dropdown"> <a href="#" class="dropdown-toggle" id="drop6" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ first_name }} {{ last_name }} <span class="caret"></span> </a> 
+              <ul class="dropdown-menu" id="menu3" aria-labelledby="drop6"> 
+                <li><a href="/cms/profile">Profile</a></li> 
+                <li><a href="/cms/settings">Settings</a></li> 
+                <li><a href="/cms/help">Help</a></li> <li role="separator" class="divider"></li> 
+                <li><a href="/cms/logout">Logout</a></li> 
+              </ul> 
+            </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div><!-- /.row -->  
+    </div>
+  </nav>
+  <!-- Main jumbotro n for a primary marketing message or call to action -->
+
+
+<!--
+Section Area
+--> 
+
+<section id="dashboard">
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-stacked" role="tablist">
+          <li role="presentation" class="active"><a href="#view-course" aria-controls="view-course" role="tab" data-toggle="tab">View Courses</a></li>
+          <li role="presentation"><a href="#create-course" aria-controls="create-course" role="tab" data-toggle="tab">Create/Update Course</a></li>
+          <li role="presentation"><a href="#delete-course" aria-controls="delete-course" role="tab" data-toggle="tab">Delete Course</a></li>
+          <li role="presentation"><a href="#add-course-session" aria-controls="add-course-session" role="tab" data-toggle="tab">Add Course Session</a></li>
+          <li role="presentation"><a href="#delete-course-session" aria-controls="delete-course-session" role="tab" data-toggle="tab">Delete Course Session</a></li>
+          <li role="presentation"><a href="#add-course-material" aria-controls="add-course-material" role="tab" data-toggle="tab">Add Course Material</a></li>          
+          <li role="presentation"><a href="#delete-course-material" aria-controls="delete-course-material" role="tab" data-toggle="tab">Delete Course Material</a></li>
+          <li role="presentation"><a href="#add-institution" aria-controls="add-institution" role="tab" data-toggle="tab">Add Institution</a></li>
+          <li role="presentation"><a href="#add-assignemnt" aria-controls="add-assignemnt" role="tab" data-toggle="tab">Add Assignment</a></li>
+          <li role="presentation"><a href="#delete-assignment" aria-controls="delete-assignment" role="tab" data-toggle="tab">Delete Assignment</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Active Courses -->
+
+
+          <!--=============================================================================
+          Course Viewing
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane active" id="view-course">
+            <div class="row">
+
+              {% for course in view_course %}
+              <!--Course Box-->
+              <div class="col-md-3">
+                <div class="ind-course-box">
+                  <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+                  </div>
+                  <h6>{{ course.name }}</h6>
+                  <p>by {{ course.institution }}</p>
+                  <p class="item">{{ course.course_category }} </p>
+                  <p>Minimum Percentage : {{ course.min_grade }} </p>                
+                </div>
+              </div>
+              <!--Course Box End-->
+              {% endfor %}
+            </div>
+          </div>
+          
+          <!--=============================================================================
+          Course Creation
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="create-course">
+
+            <div class="register-area">
+              <h4>Create Course Here</h4>
+              <form method="post" action="/cms/add-course/" enctype="multipart/form-data">
+                {% csrf_token %}  
+                <div class="form-group">
+                  <label for="exampleInputName1">Course Name</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Enter Your Name" name="course_name" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Institution</label>
+                  <select class="form-control" id="exampleInputPassword1" name="course_institution" required>
+                    {% for inst in institutions %}
+                    <option>{{ inst }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Course Category</label>
+                  <select class="form-control" id="exampleInputPassword1" name="course_category" required>
+                    <option>Category-1</option>
+                    <option>Category-2</option>
+                    <option>Category-3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Enter Course Description</label>
+                  <textarea class="form-control" rows="4" placeholder="Enter course description within 100 words" name="course_desc"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Course Schedule</label>
+                  <input type="number" class="form-control" id="exampleInputName1" placeholder="Enter the number of schedules in course." name="course_schedules" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Minimum Percentage</label>
+                  <input type="number" class="form-control" id="exampleInputName1" placeholder="Name" name="minimum_percent" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Is Active</label><br />
+                  <label class="radio-inline">
+                    <input type="radio" name="is_active" id="inlineRadio1" value=1> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="is_active" id="inlineRadio2" value=0> No
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Course Icon Image</label>
+                  <input type="file" class="form-control" id="exampleInputPassword1" placeholder="Upload course icon image here!" name="icon_image">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Course Banner</label>
+                  <input type="file" class="form-control" id="exampleInputPassword1" placeholder="Upload course banner image here!" name="banner_image">
+                </div>
+                <button type="submit" class="btn btn-default" value="submit">Save Course</button>
+              </form>
+            </div>
+          </div>
+
+          <!--=============================================================================
+          Delete Course
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="delete-course">
+
+            <div class="row">
+
+              {% for course in view_course %}
+              <!--Course Box-->
+              <div class="col-md-3">
+                <div class="ind-course-box">
+                  <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+                  </div>
+                  <h6>{{ course.name }}</h6>
+                  <button type="button" class="btn btn-danger btn-sm" style="margin: 10px" data-toggle="modal" data-target="#{{ course.id }}">Delete Course</button>                
+                </div>
+              </div>
+              <!--Course Box End-->
+              <!-- Modal -->
+              <div id="{{ course.id }}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Delete Course - {{ course.name }}</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Course once deleted can't be restored. Are you sure want to delete course?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <form method="post" action="/cms/delete-course/" enctype="multipart/form-data">
+                        {% csrf_token %}  
+                        <input type="hidden" name="delete_course_id" value="{{ course.id }}">
+                        <input type="submit" class="btn btn-danger" value="Confirm Delete">
+                      </form>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!--=============================================================================
+          Course Session Creation
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="add-course-session">
+
+            <div class="register-area">
+              <h4>Add Course Session Here</h4>
+              <form method="post" action="/cms/add-course-session/" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Course</label>
+                  <select class="form-control" id="exampleInputPassword1" name="session_course" required>
+                    {% for course in view_course %}
+                    <option value="{{ course.id }}">{{ course.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Start Date</label>
+                  <input type="date" class="form-control"  placeholder="Enter course description within 100 words" name="session_start" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">End date</label>
+                  <input type="date" class="form-control" id="exampleInputName1" placeholder="Enter the number of schedules in course." name="session_end" required>
+                </div>
+                <button type="submit" class="btn btn-default" value="submit">Add Session</button>
+              </form>
+            </div>
+          </div>
+          
+
+          <!--=============================================================================
+          Course Session Deletion
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="delete-course-session">
+            <h4>Course Session Deletion</h4>
+
+            <div class="row">
+
+
+              <table class="table table-striped"> 
+                <thead> 
+                  <tr> 
+                    <th>#</th> 
+                    <th>Session Course</th> 
+                    <th>Session Start Date</th> 
+                    <th>Session End Date</th>
+                    <th>Action</th>  
+                  </tr> 
+                </thead> 
+
+                {% for session in course_sessions %}
+                <tbody> 
+                  <tr> 
+                    <th scope="row"> {{ session.id }} </th> 
+                    <td>{{ session.course }}</td> 
+                    <td>{{ session.start_date }}</td> 
+                    <td>{{ session.end_date }}</td> 
+                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ session.id }}">Delete Course</button> </td>
+                  </tr> 
+                </tbody> 
+                <!-- Modal -->
+                <div id="{{ session.id }}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Course Session- {{ session.course }}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Course session once deleted can't be restored. Are you sure want to delete course session?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <form method="post" action="/cms/delete-course-session/" enctype="multipart/form-data">
+                          {% csrf_token %}  
+                          <input type="hidden" name="delete_course_session_id" value="{{ session.id }}">
+                          <input type="submit" class="btn btn-danger" value="Confirm Delete">
+                        </form>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                {% endfor %}
+              </table>
+
+
+            </div>
+          </div>
+
+
+          <!--=============================================================================
+          Course Material Creation
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="add-course-material">
+
+            <div class="register-area">
+              <h4>Add New Course Material Here</h4>
+              <form method="post" action="/cms/add-course-material/" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Course</label>
+                  <select class="form-control" id="exampleInputPassword1" name="course_material" required>
+                    {% for course in view_course %}
+                    <option value="{{ course.id }}">{{ course.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Enter Week</label>
+                  <input type="number" class="form-control" name="course_week" min="1" max="10" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">YouTube Link</label>
+                  <input type="text" class="form-control" id="exampleInputName1" placeholder="Enter the number of schedules in course." name="course_link" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Course Text</label>
+                  <textarea rows="5" class="form-control" id="exampleInputName1" placeholder="Enter the number of schedules in course." name="course_text" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-default" value="submit">Add Session</button>
+              </form>
+            </div>
+          </div>
+          
+
+          <!--=============================================================================
+          Course Material Deletion
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="delete-course-material">
+            <h4>Course Session Deletion</h4>
+
+            <div class="row">
+
+
+              <table class="table table-striped"> 
+                <thead> 
+                  <tr> 
+                    <th>#</th> 
+                    <th>Material for Course</th> 
+                    <th>Week</th> 
+                    <th>Link</th>
+                    <th>Action</th>  
+                  </tr> 
+                </thead> 
+
+                {% for material in course_materials %}
+                <tbody> 
+                  <tr> 
+                    <th scope="row"> {{ material.id }} </th> 
+                    <td>{{ material.course }}</td> 
+                    <td>{{ material.week }}</td> 
+                    <td>{{ material.material_link }}</td> 
+                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ material.id }}">Delete Course Material</button> </td>
+                  </tr> 
+                </tbody> 
+                <!-- Modal -->
+                <div id="{{ material.id }}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Course Session - {{ material.course }}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Course material once deleted can't be restored. Are you sure want to delete course material?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <form method="post" action="/cms/delete-course-material/" enctype="multipart/form-data">
+                          {% csrf_token %}  
+                          <input type="hidden" name="delete_course_material_id" value="{{ material.id }}">
+                          <input type="submit" class="btn btn-danger" value="Confirm Delete">
+                        </form>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                {% endfor %}
+              </table>
+
+
+            </div>
+          </div>
+
+
+          <!--=============================================================================
+          Institution Creation
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="add-institution">
+
+            <div class="register-area">
+              <h4>Add Institution</h4>
+              <form method="post" action="/cms/add-institution/" enctype="multipart/form-data">
+                {% csrf_token %}  
+                <div class="form-group">
+                  <label for="exampleInputName1">Institution Name</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Enter Your Name" name="institution_name" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Institution Location</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Enter Your Name" name="institution_location" required>
+                </div>
+                <button type="submit" class="btn btn-default" value="submit">Add Institution</button>
+              </form>
+            </div>
+          </div>
+
+          <!--=============================================================================
+          Institution Deletion
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="delete-institution">
+            <h4>Institution Deletion</h4>
+
+            <div class="row">
+
+
+              <table class="table table-striped"> 
+                <thead> 
+                  <tr> 
+                    <th>#</th> 
+                    <th>Name</th> 
+                    <th>Location</th> 
+                    <th>Action</th>  
+                  </tr> 
+                </thead> 
+
+                {% for institution in institution_list %}
+                <tbody> 
+                  <tr> 
+                    <th scope="row"> {{ institution.id }} </th> 
+                    <td>{{ institution.name }}</td> 
+                    <td>{{ institution.location }}</td> 
+                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ institution.id }}">Delete Course Instituition</button> </td>
+                  </tr> 
+                </tbody> 
+                <!-- Modal -->
+                <div id="{{ institution.id }}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Course Session - {{ institution.course }}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Instituition once deleted can't be restored. Are you sure want to delete instituition?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <form method="post" action="/cms/delete-institution/" enctype="multipart/form-data">
+                          {% csrf_token %}  
+                          <input type="hidden" name="course_institution_id" value="{{ institution.id }}">
+                          <input type="submit" class="btn btn-danger" value="Confirm Delete">
+                        </form>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                {% endfor %}
+              </table>
+
+
+            </div>
+          </div>
+          
+
+          <!--=============================================================================
+          Assignment Creation
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="add-assignemnt">
+
+            <div class="register-area">
+              <h4>Add New Assignment Here</h4>
+              <form method="post" action="/cms/add-assignment/" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Course</label>
+                  <select class="form-control" id="exampleInputPassword1" name="assignment_course" required>
+                    {% for course in view_course %}
+                    <option value="{{ course.id }}">{{ course.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Enter Week</label>
+                  <input type="number" class="form-control" name="assignment_week" min="1" max="10" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 1</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q1" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a1" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 2</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q2" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a2" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 3</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q3" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a3" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 4</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q4" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a4" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 5</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q5" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a5" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 6</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q6" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a6" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 7</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q7" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a7" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 8</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q8" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a8" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 9</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q9" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a9" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Question - 10</label>
+                  <input type="name" class="form-control" id="exampleInputName1" placeholder="Question" name="q10" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a10" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-default" value="submit">Add Assignment</button>
+              </form>            
+            </div>
+          </div>
+          
+
+          <!--=============================================================================
+          Course Material Deletion
+          ==============================================================================--> 
+
+          <div role="tabpanel" class="tab-pane" id="delete-assignment">
+            <h4>Course Session Deletion</h4>
+
+            <div class="row">
+
+
+              <table class="table table-striped"> 
+                <thead> 
+                  <tr> 
+                    <th>#</th> 
+                    <th>For Course</th> 
+                    <th>Week</th> 
+                    <th>q1</th>
+                    <th>q10</th>  
+                  </tr> 
+                </thead> 
+
+                {% for assignment in assignments %}
+                <tbody> 
+                  <tr> 
+                    <th scope="row"> {{ assignment.id }} </th> 
+                    <td>{{ assignment.course }}</td> 
+                    <td>{{ assignment.week }}</td> 
+                    <td>{{ assignment.q1 }}</td> 
+                    <td>{{ assignment.q10 }}</td> 
+                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#ass-{{ assignment.id }}">Delete Course Material</button> </td>
+                  </tr> 
+                </tbody> 
+                <!-- Modal -->
+                <div id="ass-{{ assignment.id }}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Course Assignment - {{ assignment.course }}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Course assignment once deleted can't be restored. Are you sure want to delete course assignment?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <form method="post" action="/cms/delete-assignment/" enctype="multipart/form-data">
+                          {% csrf_token %}  
+                          <input type="hidden" name="delete_course_assignment_id" value="{{ assignment.id }}">
+                          <input type="submit" class="btn btn-danger" value="Confirm Delete">
+                        </form>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                {% endfor %}
+              </table>
+
+
+            </div>
+          </div>
+
+
+
+
+          
+        </div>
+
+      </div>
+
+    </div> 
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{%static 'lms/images/pr_banner_footer.png' %}">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script type="text/javascript">
+
+  var url = window.location.href;
+  var activeTab = url.substring(url.indexOf("#") + 1);
+
+  $(".tab-pane").removeClass("active in");
+
+  $("#" + activeTab).addClass("active in");
+
+  $('a[href="#'+ activeTab +'"]').tab('show')
+
+</script>
+
+</body>
+</html>

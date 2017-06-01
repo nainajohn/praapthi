@@ -1,0 +1,10 @@
+appdirs==1.4.2
+boto==2.46.1
+Django==1.10.5
+django-storages==1.5.2
+olefile==0.44
+packaging==16.8
+Pillow==4.0.0
+psycopg2==2.7
+pyparsing==2.1.10
+six==1.10.0

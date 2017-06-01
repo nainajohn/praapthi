@@ -1,0 +1,404 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Praapthi | Online Course Platform</title>
+
+  <link href="{% static 'lms/css/styles.css' %}" rel="stylesheet">
+  <link href="{% static 'lms/css/app.css' %}" rel="stylesheet">
+
+  <script type="text/javascript" src="{% static 'lms/bower_components/jquery/dist/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'lms/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>
+
+  
+</head>
+<body>
+
+<!--
+Navigation Bar
+-->  
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/lms"><img src="{% static 'lms/images/pr_banner.png' %}"></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="What do you want to learn?">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-md-4-->
+      <div class="col-md-4">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/lms/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Catalog</a></li>
+
+            <li role="presentation" class="dropdown"> <a href="#" class="dropdown-toggle" id="drop6" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ first_name }} {{ last_name }} <span class="caret"></span> </a> 
+              <ul class="dropdown-menu" id="menu3" aria-labelledby="drop6"> 
+                <li><a href="/lms/profile">Profile</a></li> 
+                <li><a href="/lms/settings">Settings</a></li> 
+                <li><a href="/lms/help">Help</a></li> <li role="separator" class="divider"></li> 
+                <li><a href="/lms/logout">Logout</a></li> 
+              </ul> 
+            </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div><!-- /.row -->  
+    </div>
+  </nav>
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+<!--
+Section Area
+--> 
+
+<section id="dashboard">
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-stacked" role="tablist">
+        {% for material in material_list %}
+           <li role="presentation"><a href="#mate{{ material.id  }}" aria-controls="inactive-courses" role="tab" data-toggle="tab">Week {{ material.week }}</a></li>
+
+        {% endfor %}
+        {% for assignment in assignment_list %}
+           <li role="presentation"><a href="#assi{{ assignment.id  }}" aria-controls="inactive-courses" role="tab" data-toggle="tab">Assignment - Week {{ assignment.week }}</a></li>
+
+        {% endfor %}
+
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Active Courses -->
+
+
+
+          {% for material in material_list %}
+
+
+            <div role="tabpanel" class="tab-pane" id="mate{{ material.id }}">
+
+            <div class="register-area">
+              <h4>Course Materials Week {{ material.week }}</h4>
+
+           <style>.embed-container { position: relative; margin: 20px 0px; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='{{ material.material_link }}' frameborder='0' allowfullscreen></iframe></div>
+
+              <p>{{ material.material_text }}</p>
+            </div>
+          </div>
+
+
+
+
+
+         <!--<li role="presentation"><a href="#mate{{ material.id  }}" aria-controls="inactive-courses" role="tab" data-toggle="tab">Week {{ material.week }}</a></li>-->
+
+        {% endfor %}
+        {% for assignment in assignment_list %}
+
+
+        <div role="tabpanel" class="tab-pane" id="assi{{ assignment.id }}">
+
+            <div class="register-area">
+              <h4>Course Assignment - Week {{ assignment.week }}</h4>
+
+
+              <form method="post" action="/lms/assignment-submission/" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q1 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a1" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q2 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a2" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q3 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a3" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q4 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a4" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q5 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a5" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q6 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a6" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q7 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a7" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q8 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a8" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q: {{ assignment.q9 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a9" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Q : {{ assignment.q10 }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Select Answer</label>
+                  <select class="form-control" id="exampleInputPassword1" name="a10" required>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <input type="hidden" name="course_id" value="{{ course_id }}">
+                <input type="hidden" name="assignment_id" value="{{ assignment.id }}">
+                <button type="submit" class="btn btn-default" value="submit">Submit Assignment</button>
+              </form>  
+
+              <p>{{ material.material_text }}</p>
+            </div>
+          </div>
+
+        {% endfor %}
+
+
+          <div role="tabpanel" class="tab-pane active" id="active-courses">
+
+            <div class="row">
+
+               {% for course in course_list %}
+              <!--Course Box-->
+              <div class="col-md-3" style="margin-bottom: 20px">
+                <div class="ind-course-box">
+                  <div class="image-container" style="background-image:url(https://s3.amazonaws.com/praapthi/media/{{ course.course_icon }}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+                  </div>
+                  <h6>{{ course.name }}</h6>
+                  <p>by {{ course.institution }}</p>
+
+                  <button type="button" class="btn btn-primary btn-sm" style="margin: 10px" data-toggle="modal" data-target="#crs-{{ course.id }}">Enroll</button>   
+                </div>
+              </div>
+              <!--Course Box End-->
+              <!-- Modal -->
+              <div id="crs-{{ course.id }}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Enroll to the Course - {{ course.name }}</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p> {{ course.description }} </p>
+                    </div>
+                    <div class="modal-footer">
+                      <form method="post" action="/lms/enroll-course/" enctype="multipart/form-data">
+                        {% csrf_token %}  
+                        <input type="hidden" name="enroll_course_id" value="{{ course.id }}">
+                        <input type="submit" class="btn btn-primary" value="Enroll Now">
+                      </form>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              {% endfor %}
+
+
+              
+            </div>
+
+          </div>
+          <!-- Inactive Courses -->
+          <div role="tabpanel" class="tab-pane" id="inactive-courses">
+
+            <div class="row">
+
+
+              {% for course in enrolled_course_list %}
+              <!--Course Box-->
+              <div class="col-md-3" style="margin-bottom: 20px">
+              <a href="/lms/course-access?course_id={{ course.id }}">
+                <div class="ind-course-box">
+                  <div class="image-container" style="background-image:url(https://s3.amazonaws.com/praapthi/media/{{ course.course_icon }}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+                  </div>
+                  <h6>{{ course.name }}</h6>
+                  <p>by {{ course.institution }}</p>
+                  <p>Current Marks : {{ course.min_grade }}</p>
+
+                </div>
+                </a>
+              </div>
+              <!--Course Box End-->
+              {% endfor %}
+
+            </div>
+
+          </div>
+          <!--
+          <div role="tabpanel" class="tab-pane" id="completed-courses">...</div>
+          <div role="tabpanel" class="tab-pane" id="certificates">...</div>
+          <div role="tabpanel" class="tab-pane" id="updates">...</div>
+          -->
+        </div>
+
+      </div>
+
+    </div> 
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{%static 'lms/images/pr_banner_footer.png' %}">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

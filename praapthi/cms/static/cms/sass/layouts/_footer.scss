@@ -1,0 +1,25 @@
+footer {
+	margin-top: 100px;
+	@include fw(l);
+	background-color: #222;
+	img {
+		width: 50%;
+		margin-top: 20px;
+	}
+	p {
+		color: #eee;
+		font-weight: lighter;
+		margin: 20px 0px;
+		text-align: justify;
+	}
+	ul {
+		margin: 20px 0px;
+		li {
+			margin-top: 10px; 
+			list-style: none;
+			a {
+				color: #fff;	
+			}
+		}
+	}
+}

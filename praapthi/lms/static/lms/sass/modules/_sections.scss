@@ -1,0 +1,278 @@
+/*-----------------------------------------------------------------------
+Front Page Banner
+-----------------------------------------------------------------------*/
+.jumbotron {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	height: 650px;
+	background: url(../images/banner_main.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	.ban-box {
+		background-color: $pr_color;
+		background-color:rgba(0, 0, 0, 0.7);
+		color: #fff;
+		width: 70%;
+		margin: 0px auto;
+		margin-top: 120px;
+		padding: 20px;
+		h3 {
+			text-align: center;
+			margin-bottom: 10px; 
+		}
+		p {
+			text-align: center;
+			font-weight: lighter !important;
+			-webkit-font-smoothing: antialiased;
+			margin-bottom: 40px;
+		}
+		.input-group {
+			width: 60%;
+			margin: 0px auto;
+		}
+		input { 
+			height: 45px;
+			font-size: 16.5px;
+			@include fw(l);
+		}
+		button {
+			@extend input;
+			@include set_bg($pr_color);
+			border: 1px solid$pr_color;
+		}
+		.icon-area {
+			margin: 0px auto;
+			margin-top: 40px;
+			width: 80%;
+			i {
+				float: left;
+				margin-right: 5%;
+				margin-top: 10px !important;
+			}
+			p {
+				font-weight: lighter;
+				-webkit-font-smoothing: antialiased;
+				font-size:16px;
+				float: right;
+				width: 75%;
+				text-align: left;
+			}
+		}
+	}
+}
+/*-----------------------------------------------------------------------
+University Logos
+-----------------------------------------------------------------------*/
+#univ-logos {
+	background-color: $tr_color;
+}
+/*-----------------------------------------------------------------------
+Course Area
+-----------------------------------------------------------------------*/
+#course-area {
+	background-color: $tr_color;
+	padding-top: 100px;
+	.course-box {
+		.course-box-header {
+			h4 {
+				font-size: 30px !important;
+				text-align: center;
+			}
+			.sp-btn {
+				@include set_bg($pr_color);
+				float: right;
+				border-radius: 0px;
+				height: 40px;
+				margin-top: 5px;
+			}
+		}
+		.ind-course-box {
+			cursor: pointer;
+			background-color: #fff;
+			margin-top: 40px;
+			padding-bottom: 20px;
+			overflow: hidden;
+			margin-bottom: 100px;
+			@include transition(0.3s);
+			h6 {
+				font-size: 20px;
+				margin: 20px 10px 10px 10px !important;
+			}
+			p {
+				color: #888;
+				margin: 0px 10px 0px 10px !important;
+				@include fw(l);
+				font-size: 16px;
+			}
+			i {
+				font-size: 20px;
+				margin: 50px 0px 0px 10px;
+				float: left;
+			}
+			p.enrolled {
+				@include fw(n);
+				margin: 50px 0px 0px 5px !important;
+				float: left;
+			}
+			p.course-fee {
+				margin-top: 45px !important;
+				color: #000;
+				float: right;
+				font-size: 20px;
+			}
+		}
+		.ind-course-box:hover {
+			box-shadow: 10px 10px 10px #aaa;
+		}
+	}
+}
+/*-----------------------------------------------------------------------
+Info Area
+-----------------------------------------------------------------------*/
+#info-area {
+	padding: 100px 0px !important;
+	h4 {
+		text-align: center;
+		font-size: 30px;
+		margin-bottom: 40px;
+	}
+	.nav {
+		margin-right: 5%;
+		width: 35% !important;
+		margin-top: 50px;
+		float: left;
+		border: 0px;
+		h6 {
+			font-size: 24px !important;
+		}
+
+		a {
+			border: 0px;
+			color: #aaa;
+		}
+		a:hover {
+			background-color: #fff;
+			color: #666;
+		}
+		li.active a {
+			color: #000 !important;
+		}
+	}
+	.tab-content {
+		width: 60%;
+		float: left;
+		img {
+			width: 100%;
+
+		}
+	}
+}
+
+/*-----------------------------------------------------------------------
+Register Area
+-----------------------------------------------------------------------*/
+#register {
+	margin: 140px 0px !important;
+	.register-area {
+		border: 1px solid#ccc !important;
+		padding: 10px;
+		border-radius: 5px;
+	}
+	h4 {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+}
+
+.lms-login-panel {
+	margin-top: 100px;
+	form {
+		margin: 10px;
+	}
+}
+
+/*-----------------------------------------------------------------------
+Dashboard Area
+-----------------------------------------------------------------------*/
+
+#dashboard {
+
+	margin-top: 120px  !important;
+	margin-bottom: 250px !important;
+	.nav {
+	margin-right: 1%;
+	width: 25% !important;
+	float: left;
+	border: 0px;
+		h6 {
+			font-size: 24px !important;
+		}
+
+		a {
+			background-color: #ddd;
+			border: 0px;
+			color: #aaa;
+			border-radius: 0px;
+		}
+		a:hover {
+			background-color: #eee;
+			color: #666;
+		}
+		li.active a {
+			color: #000 !important;
+		}
+	}
+	.tab-content {
+		border: 1px solid#eee;
+		width: 74%;
+		float: left;
+		background-color: #ddd;
+		padding: 30px;
+		img {
+			width: 100%;
+
+		}
+	}
+
+		.ind-course-box {
+			cursor: pointer;
+			background-color: #fff;
+			padding-bottom: 20px;
+			overflow: hidden;
+			h6 {
+				font-size: 16px;
+				margin: 20px 10px 10px 10px !important;
+			}
+			p {
+				color: #888;
+				margin: 0px 10px 0px 10px !important;
+				@include fw(l);
+				font-size: 15px;
+			}
+			i {
+				font-size: 15px;
+				margin: 30px 0px 0px 10px;
+				float: left;
+			}
+			p.enrolled {
+				@include fw(n);
+				margin: 28px 0px 0px 5px !important;
+				float: left;
+			}
+			p.course-fee {
+				margin-top: 30px !important;
+				color: #000;
+				float: right;
+				font-size: 14px;
+			}
+		}
+		.ind-course-box:hover {
+			box-shadow: 10px 10px 10px #aaa;
+		}
+	
+}
+
+
+
+

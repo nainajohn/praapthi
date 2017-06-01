@@ -1,0 +1,288 @@
+@font-face {
+  font-family: SourceSansPro;
+  src: url(../fonts/SourceSansPro-Regular.ttf); }
+html, body {
+  font-family: SourceSansPro; }
+
+/*-----------------------------------------------------------------------
+Header & Navigation
+-----------------------------------------------------------------------*/
+.navbar-default {
+  background-color: #fff;
+  border-color: #ccc !important; }
+
+nav img {
+  width: 200px;
+  margin-top: 15px; }
+nav .input-group {
+  margin: 0px auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%; }
+nav ul {
+  margin-top: 30px !important; }
+  nav ul a {
+    font-size: 14.5px; }
+nav input, nav .jumbotron .ban-box button, .jumbotron .ban-box nav button {
+  height: 40px !important;
+  font-weight: lighter;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16.5px !important; }
+nav button {
+  background-color: #003366 !important;
+  color: #fff !important;
+  height: 40px !important;
+  border: 1px solid #003366 !important; }
+nav .sp-btn {
+  background-color: #003366 !important;
+  color: #fff !important; }
+nav .navbar-nav > li > .dropdown-menu {
+  border-top: 0px !important;
+  box-shadow-top: 0px; }
+nav .dropdown-menu {
+  border: 1px solid #ccc;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.175) !important;
+  -webkit-box-shadow: 0px !important; }
+
+/*-----------------------------------------------------------------------
+Front Page Banner
+-----------------------------------------------------------------------*/
+.jumbotron {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 650px;
+  background: url(../images/banner_main.jpg);
+  background-size: cover;
+  background-repeat: no-repeat; }
+  .jumbotron .ban-box {
+    background-color: #003366;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    width: 70%;
+    margin: 0px auto;
+    margin-top: 120px;
+    padding: 20px; }
+    .jumbotron .ban-box h3 {
+      text-align: center;
+      margin-bottom: 10px; }
+    .jumbotron .ban-box p {
+      text-align: center;
+      font-weight: lighter !important;
+      -webkit-font-smoothing: antialiased;
+      margin-bottom: 40px; }
+    .jumbotron .ban-box .input-group {
+      width: 60%;
+      margin: 0px auto; }
+    .jumbotron .ban-box input, .jumbotron .ban-box button {
+      height: 45px;
+      font-size: 16.5px;
+      font-weight: lighter;
+      -webkit-font-smoothing: antialiased; }
+    .jumbotron .ban-box button {
+      background-color: #003366 !important;
+      color: #fff !important;
+      border: 1px solid #003366; }
+    .jumbotron .ban-box .icon-area {
+      margin: 0px auto;
+      margin-top: 40px;
+      width: 80%; }
+      .jumbotron .ban-box .icon-area i {
+        float: left;
+        margin-right: 5%;
+        margin-top: 10px !important; }
+      .jumbotron .ban-box .icon-area p {
+        font-weight: lighter;
+        -webkit-font-smoothing: antialiased;
+        font-size: 16px;
+        float: right;
+        width: 75%;
+        text-align: left; }
+
+/*-----------------------------------------------------------------------
+University Logos
+-----------------------------------------------------------------------*/
+#univ-logos {
+  background-color: #eee; }
+
+/*-----------------------------------------------------------------------
+Course Area
+-----------------------------------------------------------------------*/
+#course-area {
+  background-color: #eee;
+  padding-top: 100px; }
+  #course-area .course-box .course-box-header h4 {
+    font-size: 30px !important;
+    text-align: center; }
+  #course-area .course-box .course-box-header .sp-btn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    float: right;
+    border-radius: 0px;
+    height: 40px;
+    margin-top: 5px; }
+  #course-area .course-box .ind-course-box {
+    cursor: pointer;
+    background-color: #fff;
+    margin-top: 40px;
+    padding-bottom: 20px;
+    overflow: hidden;
+    margin-bottom: 100px;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s; }
+    #course-area .course-box .ind-course-box h6 {
+      font-size: 20px;
+      margin: 20px 10px 10px 10px !important; }
+    #course-area .course-box .ind-course-box p {
+      color: #888;
+      margin: 0px 10px 0px 10px !important;
+      font-weight: lighter;
+      -webkit-font-smoothing: antialiased;
+      font-size: 16px; }
+    #course-area .course-box .ind-course-box i {
+      font-size: 20px;
+      margin: 50px 0px 0px 10px;
+      float: left; }
+    #course-area .course-box .ind-course-box p.enrolled {
+      margin: 50px 0px 0px 5px !important;
+      float: left; }
+    #course-area .course-box .ind-course-box p.course-fee {
+      margin-top: 45px !important;
+      color: #000;
+      float: right;
+      font-size: 20px; }
+  #course-area .course-box .ind-course-box:hover {
+    box-shadow: 10px 10px 10px #aaa; }
+
+/*-----------------------------------------------------------------------
+Info Area
+-----------------------------------------------------------------------*/
+#info-area {
+  padding: 100px 0px !important; }
+  #info-area h4 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 40px; }
+  #info-area .nav {
+    margin-right: 5%;
+    width: 35% !important;
+    margin-top: 50px;
+    float: left;
+    border: 0px; }
+    #info-area .nav h6 {
+      font-size: 24px !important; }
+    #info-area .nav a {
+      border: 0px;
+      color: #aaa; }
+    #info-area .nav a:hover {
+      background-color: #fff;
+      color: #666; }
+    #info-area .nav li.active a {
+      color: #000 !important; }
+  #info-area .tab-content {
+    width: 60%;
+    float: left; }
+    #info-area .tab-content img {
+      width: 100%; }
+
+/*-----------------------------------------------------------------------
+Register Area
+-----------------------------------------------------------------------*/
+#register {
+  margin: 140px 0px !important; }
+  #register .register-area {
+    border: 1px solid #ccc !important;
+    padding: 10px;
+    border-radius: 5px; }
+  #register h4 {
+    text-align: center;
+    margin-bottom: 20px; }
+
+.lms-login-panel {
+  margin-top: 100px; }
+  .lms-login-panel form {
+    margin: 10px; }
+
+/*-----------------------------------------------------------------------
+Dashboard Area
+-----------------------------------------------------------------------*/
+#dashboard {
+  margin-top: 120px  !important;
+  margin-bottom: 250px !important; }
+  #dashboard .nav {
+    margin-right: 1%;
+    width: 25% !important;
+    float: left;
+    border: 0px; }
+    #dashboard .nav h6 {
+      font-size: 24px !important; }
+    #dashboard .nav a {
+      background-color: #ddd;
+      border: 0px;
+      color: #aaa;
+      border-radius: 0px; }
+    #dashboard .nav a:hover {
+      background-color: #eee;
+      color: #666; }
+    #dashboard .nav li.active a {
+      color: #000 !important; }
+  #dashboard .tab-content {
+    border: 1px solid #eee;
+    width: 74%;
+    float: left;
+    background-color: #ddd;
+    padding: 30px; }
+    #dashboard .tab-content img {
+      width: 100%; }
+  #dashboard .ind-course-box {
+    cursor: pointer;
+    background-color: #fff;
+    padding-bottom: 20px;
+    overflow: hidden; }
+    #dashboard .ind-course-box h6 {
+      font-size: 16px;
+      margin: 20px 10px 10px 10px !important; }
+    #dashboard .ind-course-box p {
+      color: #888;
+      margin: 0px 10px 0px 10px !important;
+      font-weight: lighter;
+      -webkit-font-smoothing: antialiased;
+      font-size: 15px; }
+    #dashboard .ind-course-box i {
+      font-size: 15px;
+      margin: 30px 0px 0px 10px;
+      float: left; }
+    #dashboard .ind-course-box p.enrolled {
+      margin: 28px 0px 0px 5px !important;
+      float: left; }
+    #dashboard .ind-course-box p.course-fee {
+      margin-top: 30px !important;
+      color: #000;
+      float: right;
+      font-size: 14px; }
+  #dashboard .ind-course-box:hover {
+    box-shadow: 10px 10px 10px #aaa; }
+
+footer {
+  margin-top: 100px;
+  font-weight: lighter;
+  -webkit-font-smoothing: antialiased;
+  background-color: #222; }
+  footer img {
+    width: 50%;
+    margin-top: 20px; }
+  footer p {
+    color: #eee;
+    font-weight: lighter;
+    margin: 20px 0px;
+    text-align: justify; }
+  footer ul {
+    margin: 20px 0px; }
+    footer ul li {
+      margin-top: 10px;
+      list-style: none; }
+      footer ul li a {
+        color: #fff; }
+
+/*# sourceMappingURL=app.css.map */

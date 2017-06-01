@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Praapthi | Online Course Platform</title>
+
+  <link href="{% static 'cms/css/styles.css' %}" rel="stylesheet">
+  <link href="{% static 'cms/css/app.css' %}" rel="stylesheet">
+  
+
+  <script type="text/javascript" src="{% static 'cms/bower_components/jquery/dist/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'cms/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>
+
+  
+</head>
+<body>
+
+<!--
+Navigation Bar
+-->  
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/lms"><img src="{%static 'lms/images/pr_banner.png' %}"></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        
+      </div><!-- /.col-md-4-->
+      <div class="col-md-4">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/cms">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Catalog</a></li>
+
+            <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">Login</a></li>
+            <li><a class="btn sp-btn" href="/cms/register" role="button">Sign Up</a></li>
+        </div><!--/.navbar-collapse -->
+      </div><!-- /.row -->  
+    </div>
+  </nav>
+  <!-- Main jumbotro n for a primary marketing message or call to action -->
+
+  <!-- Small modal -->
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md lms-login-panel" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Course Management System - Login</h4>
+        </div>
+        <form method="post" action="/cms/login/" enctype="multipart/form-data">
+          {% csrf_token %}  
+          <div class="form-group">
+            <label for="exampleInputName1">User Name</label>
+            <input type="name" class="form-control" id="exampleInputName1" placeholder="Name" name="user_name" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+          </div>
+          <input type="submit" value="Login" class="btn sp-btn" name="">
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+<!--
+University Logos
+--> 
+<section id="univ-logos">
+
+</section>
+<!--
+Course Area
+--> 
+
+
+
+<section id="info-area">
+
+  <div class="container">
+    <h4>Course Management System</h4>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-stacked" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+        <h6>Large Heading</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et.</p>
+        </a>
+      </li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+        <h6>Large Heading</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et.</p>
+        </a>
+      </li>
+      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+        <h6>Large Heading</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et.</p>
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="home">
+        <img src={%static 'lms/images/banner_main.jpg' %} >
+      </div>
+      <div role="tabpanel" class="tab-pane" id="profile">
+        <img src={%static 'lms/images/banner_main.jpg' %}>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="messages">
+        <img src={%static 'lms/images/banner_main.jpg' %}>
+      </div>
+    </div>
+
+  </div>
+
+
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{%static 'lms/images/pr_banner_footer.png' %}">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body>
+</html>

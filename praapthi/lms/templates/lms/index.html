@@ -1,0 +1,562 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Praapthi | Online Course Platform</title>
+
+  <link href="{% static 'lms/css/styles.css' %}" rel="stylesheet">
+  <link href="{% static 'lms/css/app.css' %}" rel="stylesheet">
+  
+
+  <script type="text/javascript" src="{% static 'lms/bower_components/jquery/dist/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'lms/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>
+
+  
+</head>
+<body>
+
+<!--
+Navigation Bar
+-->  
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/lms"><img src="{%static 'lms/images/pr_banner.png' %}"></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="What do you want to learn?">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-md-4-->
+      <div class="col-md-4">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/lms">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Catalog</a></li>
+
+            <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">Login</a></li>
+            <li><a class="btn sp-btn" href="/lms/register" role="button">Sign Up</a></li>
+        </div><!--/.navbar-collapse -->
+      </div><!-- /.row -->  
+    </div>
+  </nav>
+  <!-- Main jumbotro n for a primary marketing message or call to action -->
+
+  <!-- Small modal -->
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md lms-login-panel" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Praapthi - Login</h4>
+        </div>
+        <form method="post" action="/lms/login/" enctype="multipart/form-data">
+          {% csrf_token %}  
+          <div class="form-group">
+            <label for="exampleInputName1">User Name</label>
+            <input type="name" class="form-control" id="exampleInputName1" placeholder="Name" name="user_name" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+          </div>
+          <input type="submit" value="Login" class="btn sp-btn" name="">
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="jumbotron">
+    <div class="container">
+      <div class="ban-box">
+        <h3>Explore your desire</h3>
+        <p>This is a template for a simple marketing or informational marketing or informational</p>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Let's start...Find your courses here...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div><!-- /input-group -->
+        <div class="row icon-area">
+          <div class="col-md-4">
+            <i class="fa fa-rocket fa-2x" aria-hidden="true"></i>
+            <p>More than 99 billion students</p>
+          </div>
+          <div class="col-md-4">
+            <i class="fa fa-tasks fa-2x" aria-hidden="true"></i>
+            <p>More than 99,999 courses</p>
+          </div>
+          <div class="col-md-4">
+            <i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i>
+            <p>Learn at your pace on any device</p>
+          </div>
+        </div>          
+      </div>
+    </div>
+  </div>
+<!--
+University Logos
+--> 
+<section id="univ-logos">
+
+</section>
+<!--
+Course Area
+--> 
+<section id="course-area">
+
+  <div class="container">
+    <div class="course-box">
+      <div class="course-box-header">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <h4>Popular Courses</h4>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-primary sp-btn">See All</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+          <!--Course Box End-->
+        </div>
+      </div>
+    </div>
+    <div class="course-box">
+      <div class="course-box-header">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <h4>Top Rated Courses</h4>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-primary sp-btn">See All</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+      </div>
+    </div>
+    <div class="course-box">
+      <div class="course-box-header">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <h4>Computer Science</h4>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-primary sp-btn">See All</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+      </div>
+    </div>
+    <div class="course-box">
+      <div class="course-box-header">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <h4>General Science</h4>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-primary sp-btn">See All</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+      </div>
+    </div>
+    <div class="course-box">
+      <div class="course-box-header">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <h4>Mathematics</h4>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-primary sp-btn">See All</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+        </div>
+        <!--Course Box End-->
+        <!--Course Box-->
+        <div class="col-md-3">
+          <div class="ind-course-box">
+            <div class="image-container" style="background-image:url({%static 'lms/images/courses/c1.jpg' %}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <h6>AWS Certified Solutions Architect</h6>
+            <p>by University of Michigun</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p class="enrolled">20K Enrolled</p>
+            <p class="course-fee">₹2000</p>
+          </div>
+          <!--Course Box End-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="info-area">
+
+  <div class="container">
+    <h4>How It Works?</h4>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-stacked" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+        <h6>Large Heading</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et.</p>
+        </a>
+      </li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+        <h6>Large Heading</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et.</p>
+        </a>
+      </li>
+      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+        <h6>Large Heading</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et.</p>
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="home">
+        <img src={%static 'lms/images/banner_main.jpg' %} >
+      </div>
+      <div role="tabpanel" class="tab-pane" id="profile">
+        <img src={%static 'lms/images/banner_main.jpg' %}>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="messages">
+        <img src={%static 'lms/images/banner_main.jpg' %}>
+      </div>
+    </div>
+
+  </div>
+
+
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{%static 'lms/images/pr_banner_footer.png' %}">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body>
+</html>

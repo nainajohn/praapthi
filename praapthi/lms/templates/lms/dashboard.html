@@ -1,0 +1,233 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Praapthi | Online Course Platform</title>
+
+  <link href="{% static 'lms/css/styles.css' %}" rel="stylesheet">
+  <link href="{% static 'lms/css/app.css' %}" rel="stylesheet">
+
+  <script type="text/javascript" src="{% static 'lms/bower_components/jquery/dist/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'lms/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>
+
+  
+</head>
+<body>
+
+<!--
+Navigation Bar
+-->  
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/lms"><img src="{% static 'lms/images/pr_banner.png' %}"></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="What do you want to learn?">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-md-4-->
+      <div class="col-md-4">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/lms/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Catalog</a></li>
+
+            <li role="presentation" class="dropdown"> <a href="#" class="dropdown-toggle" id="drop6" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ first_name }} {{ last_name }} <span class="caret"></span> </a> 
+              <ul class="dropdown-menu" id="menu3" aria-labelledby="drop6"> 
+                <li><a href="/lms/profile">Profile</a></li> 
+                <li><a href="/lms/settings">Settings</a></li> 
+                <li><a href="/lms/help">Help</a></li> <li role="separator" class="divider"></li> 
+                <li><a href="/lms/logout">Logout</a></li> 
+              </ul> 
+            </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div><!-- /.row -->  
+    </div>
+  </nav>
+  <!-- Main jumbotro n for a primary marketing message or call to action -->
+
+
+<!--
+Section Area
+--> 
+
+<section id="dashboard">
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-stacked" role="tablist">
+          <li role="presentation" class="active"><a href="#active-courses" aria-controls="active-courses" role="tab" data-toggle="tab">All Courses</a></li>
+          <li role="presentation"><a href="#inactive-courses" aria-controls="inactive-courses" role="tab" data-toggle="tab">Enrolled Courses</a></li> <!--
+          <li role="presentation"><a href="#completed-courses" aria-controls="completed-courses" role="tab" data-toggle="tab">Completed Courses</a></li>
+          <li role="presentation"><a href="#certificates" aria-controls="certificates" role="tab" data-toggle="tab">Certificates</a></li>
+          <li role="presentation"><a href="#updates" aria-controls="updates" role="tab" data-toggle="tab">Course Updates</a></li>-->
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Active Courses -->
+          <div role="tabpanel" class="tab-pane active" id="active-courses">
+
+            <div class="row">
+
+               {% for course in course_list %}
+              <!--Course Box-->
+              <div class="col-md-3" style="margin-bottom: 20px">
+                <div class="ind-course-box">
+                  <div class="image-container" style="background-image:url(https://s3.amazonaws.com/praapthi/media/{{ course.course_icon }}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+                  </div>
+                  <h6>{{ course.name }}</h6>
+                  <p>by {{ course.institution }}</p>
+
+                  <button type="button" class="btn btn-primary btn-sm" style="margin: 10px" data-toggle="modal" data-target="#crs-{{ course.id }}">Enroll</button>   
+                </div>
+              </div>
+              <!--Course Box End-->
+              <!-- Modal -->
+              <div id="crs-{{ course.id }}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Enroll to the Course - {{ course.name }}</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p> {{ course.description }} </p>
+                    </div>
+                    <div class="modal-footer">
+                      <form method="post" action="/lms/enroll-course/" enctype="multipart/form-data">
+                        {% csrf_token %}  
+                        <input type="hidden" name="enroll_course_id" value="{{ course.id }}">
+                        <input type="submit" class="btn btn-primary" value="Enroll Now">
+                      </form>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              {% endfor %}
+
+
+              
+            </div>
+
+          </div>
+          <!-- Inactive Courses -->
+          <div role="tabpanel" class="tab-pane" id="inactive-courses">
+
+            <div class="row">
+
+
+              {% for course in enrolled_course_list %}
+              <!--Course Box-->
+              <div class="col-md-3" style="margin-bottom: 20px">
+              <a href="/lms/course-access?course_id={{ course.id }}">
+                <div class="ind-course-box">
+                  <div class="image-container" style="background-image:url(https://s3.amazonaws.com/praapthi/media/{{ course.course_icon }}); height:150px; width: 100%; background-size: cover; background-repeat: no-repeat;">
+                  </div>
+                  <h6>{{ course.name }}</h6>
+                  <p>by {{ course.institution }}</p>
+                  <p>Current Marks : {{ course.min_grade }}</p>
+
+                </div>
+                </a>
+              </div>
+              <!--Course Box End-->
+              {% endfor %}
+
+            </div>
+
+          </div>
+          <!--
+          <div role="tabpanel" class="tab-pane" id="completed-courses">...</div>
+          <div role="tabpanel" class="tab-pane" id="certificates">...</div>
+          <div role="tabpanel" class="tab-pane" id="updates">...</div>
+          -->
+        </div>
+
+      </div>
+
+    </div> 
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{%static 'lms/images/pr_banner_footer.png' %}">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+              <li><a href='#'>Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
